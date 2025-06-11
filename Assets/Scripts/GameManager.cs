@@ -38,4 +38,10 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
+
+    // Go to home main menu
+    public void OnGoHome()
+    {
+        SceneManager.LoadScene("Home");
+    }
 }
