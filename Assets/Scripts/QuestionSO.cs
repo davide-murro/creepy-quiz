@@ -2,27 +2,41 @@ using UnityEngine;
 
 [CreateAssetMenu(menuName = "Question", fileName = "New Question SO")]
 public class QuestionSO : ScriptableObject
-{   
-    // the question
-    [TextArea(2, 6)] [SerializeField] string questionText = "Enter new question here";
-    // possible answers
-    [SerializeField] string[] answerList = new string[4];
-    // correct answer to the question
-    [SerializeField] int correctAnswerIndex;                            
+{
+    /// <summary>
+    /// Text of the question
+    /// </summary> 
+    [SerializeField]
+    [TextArea(2, 6)]
+    public string questionText = "Enter new question here";
+    /// <summary>
+    /// List of anwsers related to the question
+    /// </summary> 
+    [SerializeField] 
+    string[] answerList = new string[4];
+    /// <summary>
+    /// Correct answer index to the question
+    /// </summary> 
+    [SerializeField] 
+    int correctAnswerIndex;
 
-    // get the question
+    /// <summary>
+    /// Get the text of the question
+    /// </summary> 
     public string GetQuestionText()
     {
         return questionText;
     }
-
-    // get the list of the answers
+    /// <summary>
+    /// Get the list of anwsers related to the question
+    /// </summary> 
     public string[] GetAnswerList()
     {
         return answerList;
     }
-
-    // get the index of the correct answer of the answer list
+    /// <summary>
+    /// Get the correct answer index to the question
+    /// </summary> 
     public int GetCorrectAnswerIndex()
     {
         return correctAnswerIndex;

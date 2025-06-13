@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   questionText: With which tool can you kill more easily?
   answerList:
-  - Knife
   - Spoon
+  - Knife
   - Pillow
-  correctAnswerIndex: 2
+  correctAnswerIndex: 1

@@ -1,21 +1,12 @@
 using UnityEngine;
 
-public class ScoreKeeper : MonoBehaviour
+public class Score : MonoBehaviour
 {
+    // correct answers count
     int correctAnswers = 0;
+    // question seen count
     int questionsSeen = 0;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     // get correct answers
     public int GetCorrectAnswers()

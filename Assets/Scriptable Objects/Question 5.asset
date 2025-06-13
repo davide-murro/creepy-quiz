@@ -10,9 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7eeaddffa4c767f47914b47832d57892, type: 3}
-  m_Name: Question 1
+  m_Name: Question 5
   m_EditorClassIdentifier: 
-  questionText: Who is Creepy?
+  questionText: What might you hear on a "dead frequency"?
   answerList:
-  - Me
-  correctAnswerIndex: 0
+  - A DJ from 1932
+  - "Static\u2026 or is it whispering?"
+  - "Your own heartbeat\u2026 backwards"
+  - Ghost voices
+  correctAnswerIndex: 3

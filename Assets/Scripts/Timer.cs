@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class Timer : MonoBehaviour
@@ -5,17 +6,13 @@ public class Timer : MonoBehaviour
     [SerializeField] float timeToAnswerQuestion = 60f;
     [SerializeField] float timeToShowCorrectAnswer = 10f;
 
-    public bool isAnsweringQuestion = false;
-    public float timerFillAmount;
-    public bool loadNextQuestion;
+    [NonSerialized] public bool isAnsweringQuestion = false;
+    [NonSerialized] public float timerFillAmount = 0f;
+    [NonSerialized] public bool loadNextQuestion = false;
 
-    float timerValue;
+    // current timer value
+    float timerValue = 0f;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-
-    }
 
     // Update is called once per frame
     void Update()
@@ -26,8 +23,6 @@ public class Timer : MonoBehaviour
     // update timer
     void UpdateTimer()
     {
-        timerValue -= Time.deltaTime;
-
         if (isAnsweringQuestion)
         {
             // answering...
@@ -61,6 +56,8 @@ public class Timer : MonoBehaviour
                 isAnsweringQuestion = true;
             }
         }
+
+        timerValue -= Time.deltaTime;
     }
 
 

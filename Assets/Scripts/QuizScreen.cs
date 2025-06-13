@@ -1,44 +1,68 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Quiz : MonoBehaviour
+public class QuizScreen : MonoBehaviour
 {
+    // QUESTIONS
     [Header("Questions")]
-    [Tooltip("Scriptable object questions")][SerializeField] List<QuestionSO> questions;
+    [Tooltip("Question text box")]
+    [SerializeField]
+    TextMeshProUGUI questionTextbox;
+    [Tooltip("Scriptable object questions")]
+    [SerializeField]
+    List<QuestionSO> questions;
     QuestionSO currentQuestion;
-    [Tooltip("question text box")][SerializeField] TextMeshProUGUI questionTextBox;
+    [Tooltip("Amount of questions that the engine will pick for a single game")]
+    [SerializeField]
+    int questionsPerGame = 10;
 
+    // ANSWERS
     [Header("Answers")]
     [SerializeField] GameObject[] answerButtons;
 
+    // BUTTON SPRITES
     [Header("Button Sprites")]
     [SerializeField] Sprite defaultAnswerSprite;
     [SerializeField] Sprite selectedAnswerSprite;
 
+    // TIMER
     [Header("Timer")]
     [SerializeField] Image timerImage;
     Timer timer;
 
+    // SCORE
     [Header("Score")]
-    [SerializeField] TextMeshProUGUI scoreTextBox;
-    string scoreDefaultText = "Score: 0%";
-    ScoreKeeper scoreKeeper;
+    [SerializeField] TextMeshProUGUI scoreTextbox;
+    Score score;
 
+    // PROGRESS BAR
     [Header("Progress Bar")]
-    [SerializeField] Slider progressBar;
+    [SerializeField] Slider progressBarSlider;
+    ProgressBar progressBar;
 
-    bool hasAnswered = true;
-    public bool isCompleted;
+    // if the game is complited
+    [NonSerialized] public bool isCompleted;
+
+    // if has answered the current question
+    bool hasAnswered = false;
+
+    // loading before all questions
+    bool isLoadingQuestions = true;
 
     // Awake will be run just before Start()
     void Awake()
     {
+        // get objects
         timer = FindFirstObjectByType<Timer>();
-        scoreKeeper = FindFirstObjectByType<ScoreKeeper>();
-        scoreTextBox.text = scoreDefaultText;
-        progressBar.value = 0f;
+        score = FindFirstObjectByType<Score>();
+        progressBar = FindFirstObjectByType<ProgressBar>();
+        // get random tot questions
+        questions = questions.OrderBy(x => UnityEngine.Random.value).Take(questionsPerGame).ToList();
+        // set progress bar
         progressBar.minValue = 0f;
         progressBar.maxValue = questions.Count;
     }
@@ -48,18 +72,27 @@ public class Quiz : MonoBehaviour
     {
         // update timer image
         timerImage.fillAmount = timer.timerFillAmount;
+        // set score
+        scoreTextbox.text = $"Scare: {score.GetScore()}%";
+        // set progressbar
+        progressBarSlider.value = progressBar.GetValue();
+        progressBarSlider.minValue = progressBar.minValue;
+        progressBarSlider.maxValue = progressBar.maxValue;
 
         // time is finished
         if (timer.loadNextQuestion)
         {
+            // finish loading
+            isLoadingQuestions = false;
             // new question
             hasAnswered = false;
             GetNextQuestion();
             timer.loadNextQuestion = false;
         }
-        else if (!hasAnswered && !timer.isAnsweringQuestion)
+        else if (!isLoadingQuestions && !hasAnswered && !timer.isAnsweringQuestion)
         {
             // timer expired
+            hasAnswered = true;
             DisplayAnswer();
             SetButtonsState(false);
         }
@@ -82,26 +115,23 @@ public class Quiz : MonoBehaviour
     void DisplayQuestion()
     {
         // set question text
-        questionTextBox.text = currentQuestion.GetQuestionText();
+        questionTextbox.text = currentQuestion.GetQuestionText();
 
         // set buttons text if exists
         string[] answerList = currentQuestion.GetAnswerList();
         for (int i = 0; i < answerButtons.Length; i++)
         {
-            TextMeshProUGUI buttonTextBox = answerButtons[i].GetComponentInChildren<TextMeshProUGUI>();
+            TextMeshProUGUI buttonTextbox = answerButtons[i].GetComponentInChildren<TextMeshProUGUI>();
             if (i < answerList.Length && answerList[i] != null)
             {
                 answerButtons[i].SetActive(true);
-                buttonTextBox.text = answerList[i];
+                buttonTextbox.text = answerList[i];
             }
             else
             {
                 answerButtons[i].SetActive(false);
             }
         }
-
-        // set score
-        scoreTextBox.text = $"Score: {scoreKeeper.GetScore()}%";
     }
 
     // display answer
@@ -119,15 +149,18 @@ public class Quiz : MonoBehaviour
         if (index != null && index == correctAnswerIndex)
         {
             //Debug.Log("Correct answer! :D");
-            questionTextBox.text = "Correct!";
-            scoreKeeper.IncrementCorrectAnswers();
+            questionTextbox.text = "Correct!";
+            score.IncrementCorrectAnswers();
         }
         else
         {
             //Debug.Log("Wrong answer! :(");
             string correctAnswer = currentQuestion.GetAnswerList()[correctAnswerIndex];
-            questionTextBox.text = "Sorry, the correct answer was: \n" + correctAnswer;
+            questionTextbox.text = "Sorry, the correct answer was: \n" + correctAnswer;
         }
+
+        // Increment question seen
+        score.IncrementQuestionsSeen();
     }
 
     // enable or disable buttons
@@ -160,25 +193,22 @@ public class Quiz : MonoBehaviour
             // set buttons sprite
             SetDefaultButtonsSprite();
             // get random question
-            GetRandomQuestion();
+            GetQuestion();
             // display question
             DisplayQuestion();
-            // Increment question seen
-            scoreKeeper.IncrementQuestionsSeen();
             // progress bar
-            progressBar.value++;
+            progressBar.IncrementProgress();
         }
-        else if (progressBar.value == progressBar.maxValue)
+        else
         {
             isCompleted = true;
         }
     }
 
     // get random question and delete it from the list
-    void GetRandomQuestion()
+    void GetQuestion()
     {
-        int index = UnityEngine.Random.Range(0, questions.Count);
-        currentQuestion = questions[index];
+        currentQuestion = questions[0];
 
         if (questions.Contains(currentQuestion))
         {

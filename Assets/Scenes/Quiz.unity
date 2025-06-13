@@ -210,7 +210,7 @@ GameObject:
   - component: {fileID: 159533266}
   - component: {fileID: 159533265}
   m_Layer: 5
-  m_Name: QuestionText
+  m_Name: QuestionTextbox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -462,7 +462,11 @@ MonoBehaviour:
   - {fileID: 11400000, guid: ea5b65478ae1dde44ab187705f7f5620, type: 2}
   - {fileID: 11400000, guid: 1487f5d6f54df674c8f49015b76aee65, type: 2}
   - {fileID: 11400000, guid: ab4ede9ef96986c408cc9a1e35a0cbd3, type: 2}
-  questionTextBox: {fileID: 159533265}
+  - {fileID: 11400000, guid: b981e756484c0a541a21291ffd4fe2c3, type: 2}
+  - {fileID: 11400000, guid: 7f77a5787ab9d1744b4a3981625805e0, type: 2}
+  - {fileID: 11400000, guid: 14fc455ed41215041b6f3275ad730103, type: 2}
+  questionTextbox: {fileID: 159533265}
+  questionsPerGame: 10
   answerButtons:
   - {fileID: 1799328537}
   - {fileID: 590806392}
@@ -471,9 +475,8 @@ MonoBehaviour:
   defaultAnswerSprite: {fileID: 21300000, guid: b33c793639d1911428ee7006f27436b1, type: 3}
   selectedAnswerSprite: {fileID: 21300000, guid: 55cc58ea54389604aa54c145d8ec4272, type: 3}
   timerImage: {fileID: 1879258036}
-  scoreTextBox: {fileID: 266733748}
-  progressBar: {fileID: 535574048}
-  isCompleted: 0
+  scoreTextbox: {fileID: 266733748}
+  progressBarSlider: {fileID: 535574048}
 --- !u!224 &252332704 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1194237045275182333, guid: d045070d9294f0c41861d620353666ef, type: 3}
@@ -492,7 +495,7 @@ GameObject:
   - component: {fileID: 266733748}
   - component: {fileID: 266733747}
   m_Layer: 5
-  m_Name: ScoreText
+  m_Name: ScoreTextbox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -549,7 +552,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Score: 0%'
+  m_text: 'Scare: 0%'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 79725bdc8a644be46a6c82fda3ea2d1a, type: 2}
   m_sharedMaterial: {fileID: 8859416652134416436, guid: 79725bdc8a644be46a6c82fda3ea2d1a, type: 2}
@@ -582,7 +585,7 @@ MonoBehaviour:
   m_enableAutoSizing: 1
   m_fontSizeMin: 18
   m_fontSizeMax: 60
-  m_fontStyle: 0
+  m_fontStyle: 16
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 256
   m_textAlignment: 65535
@@ -718,7 +721,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3114037562685761019, guid: d045070d9294f0c41861d620353666ef, type: 3}
       propertyPath: m_Name
-      value: Button (1)
+      value: Answer Button 2
       objectReference: {fileID: 0}
     - target: {fileID: 4045894701995241703, guid: d045070d9294f0c41861d620353666ef, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -1152,6 +1155,7 @@ GameObject:
   m_Component:
   - component: {fileID: 535574047}
   - component: {fileID: 535574048}
+  - component: {fileID: 535574049}
   m_Layer: 5
   m_Name: Progress Bar
   m_TagString: Untagged
@@ -1231,6 +1235,18 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &535574049
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 535574046}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b22a55288d90504284c415429bda118, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &590806392 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3114037562685761019, guid: d045070d9294f0c41861d620353666ef, type: 3}
@@ -1332,7 +1348,7 @@ GameObject:
   - component: {fileID: 761478794}
   - component: {fileID: 761478793}
   m_Layer: 5
-  m_Name: GameOverText
+  m_Name: GameOverTextbox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1379,7 +1395,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Game Over
 
-    Your Scored: 100%'
+    Your Scared: 100%'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 79725bdc8a644be46a6c82fda3ea2d1a, type: 2}
   m_sharedMaterial: {fileID: 8859416652134416436, guid: 79725bdc8a644be46a6c82fda3ea2d1a, type: 2}
@@ -1623,7 +1639,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3114037562685761019, guid: d045070d9294f0c41861d620353666ef, type: 3}
       propertyPath: m_Name
-      value: Button (2)
+      value: Answer Button 3
       objectReference: {fileID: 0}
     - target: {fileID: 4045894701995241703, guid: d045070d9294f0c41861d620353666ef, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -1729,7 +1745,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3114037562685761019, guid: d045070d9294f0c41861d620353666ef, type: 3}
       propertyPath: m_Name
-      value: Button (3)
+      value: Answer Button 4
       objectReference: {fileID: 0}
     - target: {fileID: 4045894701995241703, guid: d045070d9294f0c41861d620353666ef, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -1885,7 +1901,7 @@ GameObject:
   - component: {fileID: 1500932803}
   - component: {fileID: 1500932807}
   m_Layer: 5
-  m_Name: GameOverCanvas
+  m_Name: EndCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1987,7 +2003,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c19ce3a0e991ab84cb6753db09c958d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  finalScoreText: {fileID: 761478793}
+  finalScoreTextbox: {fileID: 761478793}
 --- !u!1 &1547093859
 GameObject:
   m_ObjectHideFlags: 0
@@ -2163,9 +2179,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timeToAnswerQuestion: 10
   timeToShowCorrectAnswer: 2
-  isAnsweringQuestion: 0
-  timerFillAmount: 1
-  loadNextQuestion: 0
 --- !u!1 &1893780662
 GameObject:
   m_ObjectHideFlags: 0
@@ -2320,7 +2333,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3114037562685761019, guid: d045070d9294f0c41861d620353666ef, type: 3}
       propertyPath: m_Name
-      value: Button
+      value: Answer Button 1
       objectReference: {fileID: 0}
     - target: {fileID: 4045894701995241703, guid: d045070d9294f0c41861d620353666ef, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
