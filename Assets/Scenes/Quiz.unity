@@ -393,7 +393,7 @@ MonoBehaviour:
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0.5
+  m_MatchWidthOrHeight: 1
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -458,6 +458,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77ea38eb4de0f1d4184bef7de29aa40c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  questionTextbox: {fileID: 159533265}
   questions:
   - {fileID: 11400000, guid: ea5b65478ae1dde44ab187705f7f5620, type: 2}
   - {fileID: 11400000, guid: 1487f5d6f54df674c8f49015b76aee65, type: 2}
@@ -465,7 +466,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: b981e756484c0a541a21291ffd4fe2c3, type: 2}
   - {fileID: 11400000, guid: 7f77a5787ab9d1744b4a3981625805e0, type: 2}
   - {fileID: 11400000, guid: 14fc455ed41215041b6f3275ad730103, type: 2}
-  questionTextbox: {fileID: 159533265}
   questionsPerGame: 10
   answerButtons:
   - {fileID: 1799328537}
@@ -1936,12 +1936,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
+  m_MatchWidthOrHeight: 1
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -2440,6 +2440,10 @@ PrefabInstance:
     - target: {fileID: 3375394979581076975, guid: e4772f8808c68414285af37a56dab336, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8878703038914531723, guid: e4772f8808c68414285af37a56dab336, type: 3}
+      propertyPath: m_MatchWidthOrHeight
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9055257655547863275, guid: e4772f8808c68414285af37a56dab336, type: 3}
       propertyPath: m_Name
